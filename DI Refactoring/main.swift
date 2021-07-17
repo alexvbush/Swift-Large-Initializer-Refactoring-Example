@@ -16,8 +16,13 @@ import Foundation
 //let customer = Customer()
 //customer.basketballService = BasketballServiceImplementation()
 
-let factory = CustomerFactory()
+let authenticationServiceFactory = AuthenticationServiceFactory()
+let moneyServicesFactory = MoneyServicesFactory()
+
+let factory = CustomerFactory(authenticationServiceFactory: authenticationServiceFactory,
+                              moneyServicesFactory: moneyServicesFactory)
 let customer = factory.makeCustomer()
 
-let anotherFactory = AnotherCustomerFactory()
+let anotherFactory = AnotherCustomerFactory(authenticationServiceFactory: authenticationServiceFactory,
+                                            moneyServicesFactory: moneyServicesFactory)
 let customer2 = anotherFactory.makeCustomer()

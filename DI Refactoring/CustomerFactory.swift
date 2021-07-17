@@ -14,6 +14,24 @@ class AuthenticationServiceFactory: AuthenticationServiceFactoryInterface {
     }
 }
 
+protocol MoneyServicesFactoryInterface {
+    var financialService: FinancialService { get }
+    var checkoutService: CheckoutService { get }
+    var cartService: CartService { get }
+}
+
+class MoneyServicesFactory: MoneyServicesFactoryInterface {
+    var financialService: FinancialService {
+        FinancialServiceImplementaion()
+    }
+    var checkoutService: CheckoutService {
+        CheckoutService()
+    }
+    var cartService: CartService {
+        CartServiceImplementation()
+    }
+}
+
 class CustomerFactory {
     
     private let authenticationServiceFactory: AuthenticationServiceFactoryInterface
@@ -28,16 +46,25 @@ class CustomerFactory {
     
     var bookService: BookService { BookServiceImplementation() }
     
-    var financialService: FinancialService { FinancialServiceImplementaion() }
-    var checkoutService: CheckoutService { CheckoutService() }
-    var cartService: CartService { CartServiceImplementation() }
+    private let moneyServicesFactory: MoneyServicesFactoryInterface
+    var financialService: FinancialService {
+        moneyServicesFactory.financialService
+    }
+    var checkoutService: CheckoutService {
+        moneyServicesFactory.checkoutService
+    }
+    var cartService: CartService {
+        moneyServicesFactory.cartService
+    }
     
     var musicService: MusicService { MusicService() }
     
     var basketballService: BasketballService { BasketballServiceImplementation() }
     
-    init(authenticationServiceFactory: AuthenticationServiceFactoryInterface) {
+    init(authenticationServiceFactory: AuthenticationServiceFactoryInterface,
+         moneyServicesFactory: MoneyServicesFactoryInterface) {
         self.authenticationServiceFactory = authenticationServiceFactory
+        self.moneyServicesFactory = moneyServicesFactory
     }
     
     func makeCustomer() -> Customer {
