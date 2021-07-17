@@ -1,31 +1,13 @@
 final class Customer {
-    let loginService: LoginService // struct
-    let registrationService: RegistrationService // struct
-    let analyticsService: AnalyticsService // class
-    let bookService: BookService // protocol
-    let financialService: FinancialService // protocol
-    let checkoutService: CheckoutService // struct
-    let cartService: CartService // protocol
-    let musicService: MusicService // class
-    let basketballService: BasketballService // protocol
+    var loginService: LoginService = LoginService() // struct
+    var registrationService: RegistrationService = RegistrationService() // struct
+    var analyticsService: AnalyticsService = AnalyticsService() // class
+    var bookService: BookService = BookServiceImplementation() // protocol
+    var financialService: FinancialService = FinancialServiceImplementaion() // protocol
+    var checkoutService: CheckoutService = CheckoutService() // struct
+    var cartService: CartService = CartServiceImplementation() // protocol
+    var musicService: MusicService = MusicService() // class
+    var basketballService: BasketballService = BasketballServiceImplementation() // protocol
     
-    init(loginService: LoginService = LoginService(),
-         registrationService: RegistrationService = RegistrationService(),
-         analyticsService: AnalyticsService = AnalyticsService(),
-         bookService: BookService = BookServiceImplementation(),
-         financialService: FinancialService = FinancialServiceImplementaion(),
-         checkoutService: CheckoutService = CheckoutService(),
-         cartService: CartService = CartServiceImplementation(),
-         musicService: MusicService = MusicService(),
-         basketballService: BasketballService = BasketballServiceImplementation()) {
-        self.loginService = loginService
-        self.registrationService = registrationService
-        self.analyticsService = analyticsService
-        self.bookService = bookService
-        self.financialService = financialService
-        self.checkoutService = checkoutService
-        self.cartService = cartService
-        self.musicService = musicService
-        self.basketballService = basketballService
-    }
+    
 }
