@@ -16,6 +16,7 @@ struct CheckoutService {}
 
 protocol CartService {}
 final class CartServiceImplementation: CartService {}
+final class AnotherCartServiceImplementation: CartService {}
 
 final class MusicService {}
 
