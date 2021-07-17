@@ -1,11 +1,13 @@
-//
-//  main.swift
-//  DI Refactoring
-//
-//  Created by Alex Bush on 7/17/21.
-//
-
 import Foundation
 
-print("Hello, World!")
+let customer = Customer(loginService: LoginService(),
+                        registrationService: RegistrationService(),
+                        analyticsService: AnalyticsService(),
+                        bookService: BookServiceImplementation(),
+                        financialService: FinancialServiceImplementaion(),
+                        checkoutService: CheckoutService(),
+                        cartService: CartServiceImplementation(),
+                        musicService: MusicService(),
+                        basketballService: BasketballServiceImplementation())
 
+let customer2 = Customer(bookService: BookServiceImplementation())
