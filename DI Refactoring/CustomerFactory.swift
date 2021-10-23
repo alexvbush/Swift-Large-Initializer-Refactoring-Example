@@ -3,6 +3,7 @@ import Foundation
 protocol AuthenticationServiceFactoryInterface {
     var loginService: LoginService { get }
     var registrationService: RegistrationService { get }
+    func make() -> AuthenticationService
 }
 
 class AuthenticationServiceFactory: AuthenticationServiceFactoryInterface {
@@ -12,12 +13,18 @@ class AuthenticationServiceFactory: AuthenticationServiceFactoryInterface {
     var registrationService: RegistrationService {
         RegistrationService()
     }
+    
+    func make() -> AuthenticationService {
+        AuthenticationService(loginService: authenticationServiceFactory.loginService,
+                              registrationService: authenticationServiceFactory.registrationService)
+    }
 }
 
 protocol MoneyServicesFactoryInterface {
     var financialService: FinancialService { get }
     var checkoutService: CheckoutService { get }
     var cartService: CartService { get }
+    func make() -> MoneyService
 }
 
 class MoneyServicesFactory: MoneyServicesFactoryInterface {
@@ -30,36 +37,24 @@ class MoneyServicesFactory: MoneyServicesFactoryInterface {
     var cartService: CartService {
         CartServiceImplementation()
     }
+    
+    func make() -> MoneyService {
+        MoneyService(financialService: financialService,
+                     checkoutService: checkoutService,
+                     cartService: cartService)
+    }
 }
 
 class CustomerFactory {
     
     private let authenticationServiceFactory: AuthenticationServiceFactoryInterface
-    var loginService: LoginService {
-        authenticationServiceFactory.loginService
-    }
-    var registrationService: RegistrationService {
-        authenticationServiceFactory.registrationService
-    }
+    private let moneyServicesFactory: MoneyServicesFactoryInterface
     
     var analyticsService: AnalyticsService { AnalyticsService() }
-    
     var bookService: BookService { BookServiceImplementation() }
-    
-    private let moneyServicesFactory: MoneyServicesFactoryInterface
-    var financialService: FinancialService {
-        moneyServicesFactory.financialService
-    }
-    var checkoutService: CheckoutService {
-        moneyServicesFactory.checkoutService
-    }
-    var cartService: CartService {
-        moneyServicesFactory.cartService
-    }
-    
     var musicService: MusicService { MusicService() }
-    
     var basketballService: BasketballService { BasketballServiceImplementation() }
+    
     
     init(authenticationServiceFactory: AuthenticationServiceFactoryInterface,
          moneyServicesFactory: MoneyServicesFactoryInterface) {
@@ -68,19 +63,11 @@ class CustomerFactory {
     }
     
     func makeCustomer() -> Customer {
-        Customer(loginService: loginService,
-                 registrationService: registrationService,
+        Customer(authenticationService: authenticationServiceFactory.make(),
                  analyticsService: analyticsService,
                  bookService: bookService,
-                 financialService: financialService,
-                 checkoutService: checkoutService,
-                 cartService: cartService,
+                 moneyService: moneyServicesFactory.make(),
                  musicService: musicService,
                  basketballService: basketballService)
     }
-}
-
-
-final class AnotherCustomerFactory: CustomerFactory {
-    override var cartService: CartService { AnotherCartServiceImplementation() }
 }

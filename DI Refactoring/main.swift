@@ -23,6 +23,6 @@ let factory = CustomerFactory(authenticationServiceFactory: authenticationServic
                               moneyServicesFactory: moneyServicesFactory)
 let customer = factory.makeCustomer()
 
-let anotherFactory = AnotherCustomerFactory(authenticationServiceFactory: authenticationServiceFactory,
-                                            moneyServicesFactory: moneyServicesFactory)
-let customer2 = anotherFactory.makeCustomer()
+//let anotherFactory = AnotherCustomerFactory(authenticationServiceFactory: authenticationServiceFactory,
+//                                            moneyServicesFactory: moneyServicesFactory)
+//let customer2 = anotherFactory.makeCustomer()

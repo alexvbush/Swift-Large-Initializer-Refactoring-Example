@@ -1,30 +1,28 @@
 final class Customer {
-    private let loginService: LoginService // struct
-    private let registrationService: RegistrationService // struct
+   
+    private let authenticationService: AuthenticationService
+    
     private let analyticsService: AnalyticsService // class
     private let bookService: BookService // protocol
-    private let financialService: FinancialService // protocol
-    private let checkoutService: CheckoutService // struct
-    private let cartService: CartService // protocol
+    
+    private let moneyService: MoneyService
+    
     private let musicService: MusicService // class
     private let basketballService: BasketballService // protocol
     
-    init(loginService: LoginService,
-         registrationService: RegistrationService,
+    init(authenticationService: AuthenticationService,
          analyticsService: AnalyticsService,
          bookService: BookService,
-         financialService: FinancialService,
-         checkoutService: CheckoutService,
-         cartService: CartService,
+         moneyService: MoneyService,
          musicService: MusicService,
          basketballService: BasketballService) {
-        self.loginService = loginService
-        self.registrationService = registrationService
+        self.authenticationService = authenticationService
+        
         self.analyticsService = analyticsService
         self.bookService = bookService
-        self.financialService = financialService
-        self.checkoutService = checkoutService
-        self.cartService = cartService
+        
+        self.moneyService = moneyService
+        
         self.musicService = musicService
         self.basketballService = basketballService
     }
